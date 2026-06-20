@@ -1,0 +1,15 @@
+{
+  "name": "pixess",
+  "version": "1.0.0",
+  "description": "Convert Images to CSS.",
+  "main": "pixess.html",
+  "scripts": {
+    "dev": "node server.js",
+    "size": "node server.js --size",
+    "size:all": "node server.js --size pixess.html && node server.js --size server.js && node server.js --size README.md",
+    "check": "node -c server.js && node -e \"const fs=require('fs');const h=fs.readFileSync('pixess.html','utf-8');let i=h.indexOf('const \\$ = (id)');let e=h.lastIndexOf('</script>');new Function(h.substring(i,e));console.log('Main OK')\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
