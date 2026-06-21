@@ -33,6 +33,21 @@ if (process.argv.includes("--size")) {
   console.log(`${file}: raw=${fmt(data.length)}  gzip=${fmt(gzipSize(data))}`);
   process.exit(0);
 }
+
+if (process.argv.includes("--build")) {
+  const src = path.join(__dirname, "pixess.html");
+  const dist = path.join(__dirname, "dist");
+  fs.mkdirSync(dist, { recursive: true });
+  const data = fs.readFileSync(src);
+  fs.writeFileSync(path.join(dist, "index.html"), data);
+  fs.writeFileSync(
+    path.join(dist, "_redirects"),
+    "/* /404 404\n",
+  );
+  console.log(`  dist/index.html   ${fmt(data.length)}`);
+  console.log(`  dist/_redirects   disabling SPA fallback`);
+  process.exit(0);
+}
 let lastMtime = 0;
 setInterval(() => {
   try {
